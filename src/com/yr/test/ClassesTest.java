@@ -25,6 +25,7 @@ public class ClassesTest {
 		//new ClassesTest().add();
 		new ClassesTest().query();
 		System.out.println("testezzzz");
+		System.out.println("testezzzz");
 	}
 
 	/**
