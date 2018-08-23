@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 为这个mapper指定一个唯一的namespace,namespace的值习惯上设置成包名+sql映射文件名,这样就能够保证namespace的值是唯一的 -->
+<mapper namespace="com.yr.test.UserMapper">
+	<!-- 开启二级缓存 -->
+	<!-- <cache flushInterval="60000" ></cache> -->
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+
+	<!-- 存储过程 -->
+	<select id="getCount" useCache="false" statementType="CALLABLE" parameterMap="getCountMap">
+		call ges_user_count(?,?)
+	</select>
+	<parameterMap type="java.util.Map" id="getCountMap">
+		<parameter property="sex_id" mode="IN" jdbcType="INTEGER" />
+		<parameter property="user_count" mode="OUT" jdbcType="INTEGER" />
+	</parameterMap>
+	<!-- 在select标签中编写查询的SQL语句, 设置select标签的id属性为getUser,id属性值必须是唯一的,不能够重复 使用parameterType属性指明查询时使用的参数类型,resultType属性指明查询返回的结果集类型 
+		resultType="_users"就表示将查询结果封装成一个User类的对象返回 User类就是users表所对应的实体类 -->
+	<!-- 根据id查询得到一个user对象 -->
+	<select flushCache="false" id="getAll" parameterType="_users" resultMap="users">
+		select *
+		from users
+		<where>
+			<if test="name!=null and name!=''">and namedj like #{name}</if>
+			<if test="id!=10 and id!=null">and id in</if>
+			<if test="id!=10">
+				<foreach collection="list" open="(" close=")" separator="," item="ids" index="index">
+					#{ids}
+				</foreach>
+			</if>
+		</where>
+	</select>
+
+	<select id="getUser" parameterType="int" resultMap="users">
+		select *
+		from users where id=#{id}
+	</select>
+	<insert id="addUser" parameterType="_users">
+	 	insert into users(namedj, agedj) values(#{name}, #{age})
+	 </insert>
+	 
+	 <delete id="deleteUser" parameterType="int">
+	 	delete from users where id=#{id}
+	 </delete>
+	 
+	 <update id="updateUser" parameterType="_users">
+	 	update users set namedj=#{name},agedj=#{age} where id=#{id}
+	 </update>
+	 <resultMap type="_users" id="users">
+		<id property="id" column="id"/>
+		<result property="name" column="namedj"/>
+		<result property="age" column="agedj"/>
+	</resultMap>
+	
+	<select id="getAllClass" parameterType="int" resultMap="class">
+		select *
+		from class ,teacher where class.teacherId=teacher.t_id
+	</select>
+
+	<select id="getOneClass" parameterType="int" resultMap="class">
+		select *
+		from class,teacher,student where class.teacherId=teacher.t_id and class.c_id = student.classId and class.c_id =#{id}
+	</select>
+	<insert id="addClasses" parameterType="class">
+	 	insert into class(c_name) values(#{name})
+	 </insert>
+	 <insert id="addTeacher" parameterType="teacher">
+	 	insert into teacher(t_id, t_name) values(#{id}, #{name})
+	 </insert>
+	 
+	 <resultMap type="class" id="class">
+		<id property="id" column="c_id"/>
+		<result property="name" column="c_name"/>
+		<association property="teacher" javaType="teacher">
+			<id property="id" column="t_id" />
+			<result property="name" column="t_name" />
+		</association>
+		<collection property="stuList" ofType="student">
+			<id property="id" column="s_id" />
+			<result property="name" column="s_name" />
+		</collection>
+	</resultMap>
+	
+	<select id="getOneClasses" parameterType="int" resultMap="classes">
+		select *
+		from class where c_id=#{id}
+	</select>
+	<select id="getTeacher" parameterType="int" resultType="teacher">
+		select t_id id,t_name name
+		from teacher where t_id=#{id}
+	</select>
+	
+	<resultMap type="class" id="classes">
+		<id property="id" column="c_id"/>
+		<result property="name" column="c_name"/>
+		<association property="teacher" column="teacherId" select="getTeacher" />
+	</resultMap>
+</mapper>

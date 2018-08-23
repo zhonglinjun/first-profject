@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+	xsi:noNamespaceSchemaLocation="../config/ehcache.xsd" updateCheck="false">
+
+	<diskStore path="E:\ehcache" />
+
+	<defaultCache 
+		maxElementsInMemory="1000"
+		maxElementsOnDisk="10000000"
+		eternal="false" 
+		overflowToDisk="true"
+		timeToIdleSeconds="120" 
+		timeToLiveSeconds="120"
+		diskExpiryThreadIntervalSeconds="120" 
+		memoryStoreEvictionPolicy="LRU">
+
+	</defaultCache>
+	
+	<!-- <cache name="helloworld1"  
+         maxElementsInMemory="10"  
+         eternal="false"  
+         timeToIdleSeconds="5"  
+         timeToLiveSeconds="5"  
+         overflowToDisk="true"  
+         memoryStoreEvictionPolicy="LRU"/>   -->
+
+</ehcache>
