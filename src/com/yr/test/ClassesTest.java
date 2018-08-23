@@ -12,11 +12,11 @@ import com.yr.bean.Classes;
 import com.yr.bean.Teacher;
 
 /**
- * ²âÊÔ:Ò»¶ÔÒ»¹ØÁª±í²éÑ¯
+ * æµ‹è¯•:ä¸€å¯¹ä¸€å…³è”è¡¨æŸ¥è¯¢
  * 
  * @author liucong
  *
- * @date 2017Äê7ÔÂ25ÈÕ
+ * @date 2017å¹´7æœˆ25æ—¥
  */
 public class ClassesTest {
 	private SqlSession session;
@@ -24,19 +24,19 @@ public class ClassesTest {
 	public static void main(String[] args) throws Exception {
 		//new ClassesTest().add();
 		new ClassesTest().query();
-		System.out.println("teste");
+		System.out.println("testezzzz");
 	}
 
 	/**
-	 * µÃµ½SessionFactory
+	 * å¾—åˆ°SessionFactory
 	 * 
 	 * @return
 	 */
 	private SqlSessionFactory getFactory() {
-		// mybatisµÄÅäÖÃÎÄ¼ş
+		// mybatisçš„é…ç½®æ–‡ä»¶
 		String resource = "conf.xml";
-		Reader reader;// Ê¹ÓÃMyBatisÌá¹©µÄResourceÀà¼ÓÔØmybatisµÄÅäÖÃÎÄ¼ş,Ò²¼ÓÔØ¹ØÁªµÄÓ³ÉäÎÄ¼ş
-		SqlSessionFactory sessionFactory = null;// ¹¹½¨sqlSessionµÄ¹¤³§
+		Reader reader;// ä½¿ç”¨MyBatisæä¾›çš„Resourceç±»åŠ è½½mybatisçš„é…ç½®æ–‡ä»¶,ä¹ŸåŠ è½½å…³è”çš„æ˜ å°„æ–‡ä»¶
+		SqlSessionFactory sessionFactory = null;// æ„å»ºsqlSessionçš„å·¥å‚
 		try {
 			reader = Resources.getResourceAsReader(resource);
 			sessionFactory = new SqlSessionFactoryBuilder().build(reader);
@@ -48,7 +48,7 @@ public class ClassesTest {
 
 	public void querys() throws Exception {
 		SqlSessionFactory sessionFactory = getFactory();
-		// ´´½¨ÄÜÖ´ĞĞÓ³ÉäÎÄ¼şÖĞsqlµÄsqlSession
+		// åˆ›å»ºèƒ½æ‰§è¡Œæ˜ å°„æ–‡ä»¶ä¸­sqlçš„sqlSession
 		session = sessionFactory.openSession();
 		UserMapper mapper = session.getMapper(UserMapper.class);
 		List<Classes> classesList = mapper.getAllClass();
@@ -60,7 +60,7 @@ public class ClassesTest {
 
 	public void query() throws Exception {
 		SqlSessionFactory sessionFactory = getFactory();
-		// ´´½¨ÄÜÖ´ĞĞÓ³ÉäÎÄ¼şÖĞsqlµÄsqlSession
+		// åˆ›å»ºèƒ½æ‰§è¡Œæ˜ å°„æ–‡ä»¶ä¸­sqlçš„sqlSession
 		session = sessionFactory.openSession();
 		UserMapper mapper = session.getMapper(UserMapper.class);
 		Classes classes = mapper.getOneClass(1);
@@ -70,7 +70,7 @@ public class ClassesTest {
 	
 	public void query1() throws Exception {
 		SqlSessionFactory sessionFactory = getFactory();
-		// ´´½¨ÄÜÖ´ĞĞÓ³ÉäÎÄ¼şÖĞsqlµÄsqlSession
+		// åˆ›å»ºèƒ½æ‰§è¡Œæ˜ å°„æ–‡ä»¶ä¸­sqlçš„sqlSession
 		session = sessionFactory.openSession();
 		UserMapper mapper = session.getMapper(UserMapper.class);
 		Classes classes = mapper.getOneClasses(1);
@@ -79,7 +79,7 @@ public class ClassesTest {
 	}
 	public void add() throws Exception {
 		SqlSessionFactory sessionFactory = getFactory();
-		// ´´½¨ÄÜÖ´ĞĞÓ³ÉäÎÄ¼şÖĞsqlµÄsqlSession
+		// åˆ›å»ºèƒ½æ‰§è¡Œæ˜ å°„æ–‡ä»¶ä¸­sqlçš„sqlSession
 		session = sessionFactory.openSession(true);
 		UserMapper mapper = session.getMapper(UserMapper.class);
 		Classes classes=new Classes();
