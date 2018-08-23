@@ -24,6 +24,7 @@ public class ClassesTest {
 	public static void main(String[] args) throws Exception {
 		//new ClassesTest().add();
 		new ClassesTest().query();
+		System.out.println("teste");
 	}
 
 	/**
